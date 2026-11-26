@@ -1,43 +1,19 @@
-name: Build Android APK
+  - name: Prepare Android project
+        run: |
+          if [ ! -d android ]; then
+            npx cap add android
+          fi
 
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Java
-        uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: '21'
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Generate Android project
-        run: npx cap add android
-
-      - name: Sync Android
+      - name: Sync Android project
         run: npx cap sync android
 
-      - name: Build APK
-        run: cd android && bash gradlew assembleDebug
+      - name: Build Android APK
+        working-directory: android
+        run: bash ./gradlew assembleDebug --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: ConcertPlanner-APK
+          name: ConcertPlanner-Android-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
