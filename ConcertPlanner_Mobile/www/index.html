@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c1422">
+  <meta name="description" content="A mobile-first event budget, ticket price and concert research planner.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Concert Planner">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/stage-180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/stage-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>Concert Planner · Mobile</title>
+</head>
+<body>
+  <div class="shell">
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-mark"><img src="icons/stage-192.png" alt="" width="40" height="40"></div>
+        <div class="brand-copy"><strong>CONCERT<span>PLANNER</span></strong><small>Event finance workspace</small></div>
+      </div>
+      <button id="header-save" class="icon-button header-save" aria-label="Save current calculation" title="Save current calculation" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h12l3 3v15H4V3h1Zm2 0v7h9V3M7 21v-8h10v8"/></svg>
+      </button>
+    </header>
+
+    <main id="app-main" class="app-main" tabindex="-1" aria-live="off"></main>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button data-tab="plan" class="nav-btn active" aria-current="page" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 12 9-9 9 9M5 11v10h14V11M9 21v-6h6v6"/></svg><span>Plan</span>
+      </button>
+      <button data-tab="budget" class="nav-btn" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="15" rx="2"/><path d="M7 6V4h10v2M3 11h18M16 15h2"/></svg><span>Budget</span>
+      </button>
+      <button data-tab="results" class="nav-btn" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 18v-7h4v7M10 18V6h4v12M15 18v-9h4v9"/></svg><span>Results</span>
+      </button>
+      <button data-tab="research" class="nav-btn" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M7 11h7M10.5 7.5v7"/></svg><span>Research</span>
+      </button>
+      <button data-tab="library" class="nav-btn" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg><span>Library</span>
+      </button>
+    </nav>
+  </div>
+
+  <input id="file-input" type="file" accept=".json,.txt,.csv,.pdf,.xlsx,.docx" hidden multiple>
+  <dialog id="app-dialog" aria-labelledby="dialog-title"><div id="dialog-content"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+      window.addEventListener('load', () => navigator.serviceWorker.register('service-worker.js').catch(() => {}));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "appId": "com.concertplanner.mobile",
+  "appName": "Concert Planner",
+  "webDir": "www",
+  "plugins": {
+    "CapacitorHttp": { "enabled": true }
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}
